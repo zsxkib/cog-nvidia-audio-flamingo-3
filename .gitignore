@@ -54,3 +54,4 @@ Thumbs.db
 *.tmp
 *.temp
 *.log
+llava/model/coat/optimizer/kernels/build/

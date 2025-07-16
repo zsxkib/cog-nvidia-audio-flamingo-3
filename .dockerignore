@@ -58,3 +58,4 @@ Thumbs.db
 # Git files
 .git/
 .gitignore
+llava/model/coat/optimizer/kernels/build/
