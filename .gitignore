@@ -12,6 +12,9 @@
 # Audio flamingo model directory
 audio-flamingo-3/
 
+# Model cache
+/model_cache/*
+
 # Large audio files (>5MB)
 static/speech/be84d293-5e9c-4158-9a1e-b4dd1acb7d70.wav
 static/audio/audio2.wav
@@ -26,6 +29,11 @@ __pycache__/
 .Python
 .cache/
 .pytest_cache/
+
+# Development directories
+.claude/
+.cog/
+.gradio/
 
 # Virtual environments
 venv/
