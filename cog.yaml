@@ -4,22 +4,26 @@
 build:
   # set to true if your model requires a GPU
   gpu: true
+  cuda: "12.1"
 
   # a list of ubuntu apt packages to install
   system_packages:
     - "libgl1-mesa-glx"
     - "libglib2.0-0"
+    - "libsndfile1"
+    - "ffmpeg"
+    - "git"
 
   # python version in the form '3.11' or '3.11.4'
-  python_version: "3.11"
+  python_version: "3.10"
 
   # path to a Python requirements.txt file
-  python_requirements: requirements.txt
+  python_requirements: requirements_cog.txt
 
   # commands run after the environment is setup
   run:
-  - curl -o /usr/local/bin/pget -L "https://github.com/replicate/pget/releases/latest/download/pget_$(uname -s)_$(uname -m)"
-  - chmod +x /usr/local/bin/pget
+    - curl -o /usr/local/bin/pget -L "https://github.com/replicate/pget/releases/latest/download/pget_$(uname -s)_$(uname -m)"
+    - chmod +x /usr/local/bin/pget
 
 # predict.py defines how predictions are run on your model
 predict: "predict.py:Predictor"

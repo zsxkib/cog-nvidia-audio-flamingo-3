@@ -1,147 +1,238 @@
-# Cog Template Repository
+---
+license: other
+title: Audio Flamingo 3 Demo
+sdk: gradio
+emoji: 🚀
+colorFrom: green
+colorTo: green
+pinned: true
+short_description: Audio Flamingo 3 Demo
+---
 
-This is a template repository for creating [Cog](https://github.com/replicate/cog) models that efficiently handle model weights with proper caching. It includes tools to upload model weights to Google Cloud Storage and generate download code for your `predict.py` file.
+<div align="center" style="display: flex; justify-content: center; align-items: center; text-align: center;">
+  <a href="https://github.com/NVIDIA/audio-flamingo" style="margin-right: 20px; text-decoration: none; display: flex; align-items: center;">
+    <img src="static/logo-no-bg.png" alt="Audio Flamingo 3 🔥🚀🔥" width="120">
+  </a>
+</div>
+<div align="center" style="display: flex; justify-content: center; align-items: center; text-align: center;">
+    <h2>
+    Audio Flamingo 3: Advancing Audio Intelligence with Fully Open Large Audio-Language Models
+    </h2>
+</div>
 
-[![Replicate](https://replicate.com/zsxkib/model-name/badge)](https://replicate.com/zsxkib/model-name)
+<div align="center" style="display: flex; justify-content: center; margin-top: 10px;">
+  <a href=""><img src="https://img.shields.io/badge/arXiv-2503.03983-AD1C18" style="margin-right: 5px;"></a>
+  <a href="https://research.nvidia.com/labs/adlr/AF3/"><img src="https://img.shields.io/badge/Demo page-228B22" style="margin-right: 5px;"></a>
+  <a href="https://github.com/NVIDIA/audio-flamingo"><img src='https://img.shields.io/badge/Github-Audio Flamingo 3-9C276A' style="margin-right: 5px;"></a>
+  <a href="https://github.com/NVIDIA/audio-flamingo/stargazers"><img src="https://img.shields.io/github/stars/NVIDIA/audio-flamingo.svg?style=social"></a>
+</div>
 
-## Getting Started
+<div align="center" style="display: flex; justify-content: center; margin-top: 10px; flex-wrap: wrap; gap: 5px;">
+  <a href="https://huggingface.co/nvidia/audio-flamingo-3">
+    <img src="https://img.shields.io/badge/🤗-Checkpoints-ED5A22.svg">
+  </a>
+  <a href="https://huggingface.co/nvidia/audio-flamingo-3-chat">
+    <img src="https://img.shields.io/badge/🤗-Checkpoints (Chat)-ED5A22.svg">
+  </a>
+  <a href="https://huggingface.co/datasets/nvidia/AudioSkills">
+    <img src="https://img.shields.io/badge/🤗-Dataset: AudioSkills--XL-ED5A22.svg">
+  </a>
+  <a href="https://huggingface.co/datasets/nvidia/LongAudio">
+    <img src="https://img.shields.io/badge/🤗-Dataset: LongAudio--XL-ED5A22.svg">
+  </a>
+  <a href="https://huggingface.co/datasets/nvidia/AF-Chat">
+    <img src="https://img.shields.io/badge/🤗-Dataset: AF--Chat-ED5A22.svg">
+  </a>
+  <a href="https://huggingface.co/datasets/nvidia/AF-Think">
+    <img src="https://img.shields.io/badge/🤗-Dataset: AF--Think-ED5A22.svg">
+  </a>
+</div>
 
-To use this template for your own model:
+<div align="center" style="display: flex; justify-content: center; margin-top: 10px;">
+<a href="https://huggingface.co/spaces/nvidia/audio_flamingo_3"><img src="https://img.shields.io/badge/🤗-Gradio Demo (7B)-5F9EA0.svg" style="margin-right: 5px;"></a>
+</div>
 
-1. Clone this repository
-2. Modify `predict.py` with your model's implementation
-3. Update `cog.yaml` with your model's dependencies
-4. Use `cache_manager.py` to upload and manage model weights
+## Overview
 
-## Repository Structure
+This repo contains the PyTorch implementation of [Audio Flamingo 3: Advancing Audio Intelligence with Fully Open Large Audio-Language Models](). Audio Flamingo 3 (AF3) is a fully open, state-of-the-art Large Audio-Language Model (LALM) that advances reasoning and understanding across speech, sounds, and music. AF3 builds on previous work with innovations in:
 
-- `predict.py`: The main model implementation file 
-- `cache_manager.py`: Script for uploading model weights to GCS and generating download code
-- `cog.yaml`: Cog configuration file that defines your model's environment
+- Unified audio representation learning (speech, sound, music)  
+- Flexible, on-demand chain-of-thought reasoning (Thinking in Audio) 
+- Long-context audio comprehension (including speech and up to 10 minutes)
+- Multi-turn, multi-audio conversational dialogue (AF3-Chat)    
+- Voice-to-voice interaction (AF3-Chat)    
 
-## Managing Model Weights with cache_manager.py
+Extensive evaluations confirm AF3’s effectiveness, setting new benchmarks on over 20 public audio understanding and reasoning tasks.
 
-A key feature of this template is the `cache_manager.py` script, which helps you:
 
-1. Upload model weights to Google Cloud Storage (GCS)
-2. Generate code for downloading those weights in your `predict.py`
-3. Handle both individual files and directories efficiently
+## Main Results
 
-### Prerequisites for Using cache_manager.py
+Audio Flamingo 3 outperforms prior SOTA models including GAMA, Audio Flamingo, Audio Flamingo 2, Qwen-Audio, Qwen2-Audio, Qwen2.5-Omni.LTU, LTU-AS, SALMONN, AudioGPT, Gemini Flash v2 and Gemini Pro v1.5 on a number of understanding and reasoning benchmarks.
 
-- Google Cloud SDK installed and configured (`gcloud` command)
-- Permission to upload to the specified GCS bucket (default: `gs://replicate-weights/`)
-- `tar` command available in your PATH
+<div align="center">
+  <img class="img-full" src="static/af3_radial-1.png" width="300">
+</div>
 
-### Basic Usage
+<div align="center">
+  <img class="img-full" src="static/af3_sota.png" width="400">
+</div>
+
+## Audio Flamingo 3 Architecture
+
+Audio Flamingo 3 uses AF-Whisper unified audio encoder, MLP-based audio adaptor, Decoder-only LLM backbone (Qwen2.5-7B), and Streaming TTS module (AF3-Chat).
+Audio Flamingo 3 can take up to 10 minutes of audio inputs. 
+
+<div align="center">
+  <img class="img-full" src="static/af3_main_diagram-1.png" width="800">
+</div>
+
+## Installation
 
 ```bash
-python cache_manager.py --model-name your-model-name --local-dirs model_cache
+./environment_setup.sh af3
 ```
 
-This will:
-1. Find files and directories in the `model_cache` directory
-2. Create tar archives of each directory
-3. Upload both individual files and tar archives to GCS
-4. Generate code snippets for downloading the weights in your `predict.py`
+## Gradio Web Demo
 
-### Advanced Usage
+This repository includes a Gradio web application (`app.py`) that provides an interactive interface for Audio Flamingo 3:
+
+- **Single-Turn Inference** - Ask questions about audio files
+- **Think/Long Audio** - Chain-of-thought reasoning for complex audio analysis  
+- **Multi-Turn Chat** - Conversational dialogue about audio content
+- **Example audio files** - Pre-loaded examples to test the model
+
+To run the Gradio demo, use the manual installation guide below.
+
+## Detailed Manual Installation Guide
+
+If the automatic installation script doesn't work, follow these **exact commands** that have been tested and verified to work:
+
+### Prerequisites
+- NVIDIA GPU with CUDA support
+- Conda/Miniconda installed  
+- Linux environment
+
+### Complete Working Installation Sequence
 
 ```bash
-python cache_manager.py \
-    --model-name your-model-name \
-    --local-dirs model_cache weights \
-    --gcs-base-path gs://replicate-weights/ \
-    --cdn-base-url https://weights.replicate.delivery/default/ \
-    --keep-tars
+# Step 1: Create and activate conda environment
+conda create -n audio-flamingo python=3.10 -y
+conda activate audio-flamingo
+
+# Step 2: Install PyTorch with CUDA 12.1 support
+pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu121
+
+# Step 3: Install core dependencies
+pip install gradio peft huggingface_hub
+
+# Step 4: Install additional dependencies (excluding deepspeed initially)
+pip install hydra-core loguru soundfile librosa openai-whisper ftfy jiwer einops wandb kaldiio matplotlib opencv-python-headless
+
+# Step 5: Install PyTorchVideo (required by llava module)
+pip install pytorchvideo==0.1.5
+
+# Step 6: Install CUDA toolkit (required for DeepSpeed compilation)
+conda install nvidia/label/cuda-12.4.0::cuda-toolkit -y
+
+# Step 7: Install DeepSpeed with proper CUDA support
+export CUDA_HOME=$CONDA_PREFIX
+pip install deepspeed==0.15.4
+
+# Step 8: Install exact transformers version (critical for compatibility)
+pip install transformers==4.46.0 --force-reinstall
+
+# Step 9: Run the application
+CUDA_HOME=$CONDA_PREFIX python app.py
 ```
 
-#### Parameters
+### Quick Start (Copy-Paste Ready)
+```bash
+conda create -n audio-flamingo python=3.10 -y && conda activate audio-flamingo
+pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu121
+pip install gradio peft huggingface_hub
+pip install hydra-core loguru soundfile librosa openai-whisper ftfy jiwer einops wandb kaldiio matplotlib opencv-python-headless
+pip install pytorchvideo==0.1.5
+conda install nvidia/label/cuda-12.4.0::cuda-toolkit -y
+export CUDA_HOME=$CONDA_PREFIX && pip install deepspeed==0.15.4
+pip install transformers==4.46.0 --force-reinstall
+CUDA_HOME=$CONDA_PREFIX python app.py
+```
 
-- `--model-name`: Required. The name of your model (used in paths)
-- `--local-dirs`: Required. One or more local directories to process
-- `--gcs-base-path`: Optional. Base Google Cloud Storage path
-- `--cdn-base-url`: Optional. Base CDN URL
-- `--keep-tars`: Optional. Keep the generated .tar files locally after upload
+### Expected Output
+When successful, you'll see:
+```
+* Running on local URL:  http://127.0.0.1:7860
+* Running on public URL: https://xxxxx.gradio.live
+```
 
-## Workflow Example
+### Critical Notes
+- **DO NOT** try to install from requirements.txt directly (deepspeed will fail)
+- **DO NOT** try to install llava as editable package (no setup.py exists)
+- **ALWAYS** set CUDA_HOME when running: `CUDA_HOME=$CONDA_PREFIX python app.py`
+- **MUST** use transformers==4.46.0 exactly (newer versions break imports)
 
-1. **Develop your model locally**:
-   ```bash
-   # Run your model once to download weights to model_cache
-   cog predict -i prompt="test"
-   ```
+### Common Failures & Solutions
+- **"ModuleNotFoundError: No module named 'pytorchvideo'"** → Install pytorchvideo==0.1.5
+- **"CUDA_HOME does not exist"** → Install cuda-toolkit via conda and set CUDA_HOME
+- **"cannot import name 'Qwen2FlashAttention2'"** → Use transformers==4.46.0 exactly
+- **DeepSpeed compilation fails** → Ensure CUDA toolkit installed via conda, not pip
 
-2. **Upload model weights**:
-   ```bash
-   python cache_manager.py --model-name your-model-name --local-dirs model_cache
-   ```
+### Tested Environment
+✅ **Verified working on:**
+- Ubuntu Linux + NVIDIA A100 80GB
+- CUDA 12.4 + PyTorch 2.5.1+cu121
+- Python 3.10 + Conda environment
 
-3. **Copy the generated code snippet** into your `predict.py`
+## Code Structure
 
-4. **Test that the model can download weights**:
-   ```bash
-   rm -rf model_cache
-   cog predict -i prompt="test"
-   ```
+- The folder ```audio_flamingo_3/``` contains the main training and inference code of Audio Flamingo 3.
+- The folder ```audio_flamingo_3/scripts``` contains the inference scripts of Audio Flamingo 3 in case you would like to use our pretrained checkpoints on HuggingFace.
 
-## Example Implementation
+Each folder is self-contained and we expect no cross dependencies between these folders. This repo does not contain the code for Streaming-TTS pipeline which will released in the near future.
 
-The template comes with a sample Stable Diffusion implementation in `predict.py` that demonstrates:
+## Single Line Inference
 
-- Setting up the model cache directory
-- Downloading weights from GCS with progress reporting
-- Setting environment variables for model caching
-- Random seed generation for reproducibility
-- Output format and quality options
+To infer stage 3 model directly, run the command below:
+```bash
+python llava/cli/infer_audio.py --model-base /path/to/checkpoint/af3-7b --conv-mode auto --text "Please describe the audio in detail" --media static/audio1.wav
+```
 
-## Best Practices
+To infer the model in stage 3.5 model, run the command below:
+```bash
+python llava/cli/infer_audio.py --model-base /path/to/checkpoint/af3-7b --model-path /path/to/checkpoint/af3-7b/stage35 --conv-mode auto --text "Please describe the audio in detail" --media static/audio1.wav --peft-mode
+```
 
-- **Environment Variables**: Set cache-related environment variables early
-  ```python
-  os.environ["HF_HOME"] = MODEL_CACHE
-  os.environ["TORCH_HOME"] = MODEL_CACHE
-  # etc.
-  ```
+## References
 
-- **Seed Management**: Provide a seed parameter and implement random seed generation
-  ```python
-  if seed is None:
-      seed = int.from_bytes(os.urandom(2), "big")
-  print(f"Using seed: {seed}")
-  ```
-
-- **Output Formats**: Support multiple output formats (webp, jpg, png) with quality controls
-  ```python
-  output_format: str = Input(
-      description="Format of the output image",
-      choices=["webp", "jpg", "png"],
-      default="webp"
-  )
-  output_quality: int = Input(
-      description="The image compression quality...",
-      ge=1, le=100, default=80
-  )
-  ```
-
-## Deploying to Replicate
-
-After setting up your model, you can push it to [Replicate](https://replicate.com):
-
-1. Create a new model on Replicate
-2. Push your model:
-   ```bash
-   cog push r8.im/username/model-name
-   ```
+The main training and inferencing code within each folder are modified from [NVILA](https://github.com/NVlabs/VILA/tree/main) [Apache license](incl_licenses/License_1.md).
 
 ## License
 
-MIT
+- The code in this repo is under [MIT license](incl_licenses/MIT_license.md).
+- The checkpoints are for non-commercial use only [NVIDIA OneWay Noncommercial License](incl_licenses/NVIDIA_OneWay_Noncommercial_License.docx). They are also subject to the [Qwen Research license](https://huggingface.co/Qwen/Qwen2.5-7B/blob/main/LICENSE), the [Terms of Use](https://openai.com/policies/terms-of-use) of the data generated by OpenAI, and the original licenses accompanying each training dataset.
+- Notice: Audio Flamingo 3 is built with Qwen-2.5. Qwen is licensed under the Qwen RESEARCH LICENSE AGREEMENT, Copyright (c) Alibaba Cloud. All Rights Reserved.
 
----
 
----
+## Citation
 
-⭐ Star this on [GitHub](https://github.com/zsxkib/model-name)!
+- Audio Flamingo 2
+```
+@article{ghosh2025audio,
+  title={Audio Flamingo 2: An Audio-Language Model with Long-Audio Understanding and Expert Reasoning Abilities},
+  author={Ghosh, Sreyan and Kong, Zhifeng and Kumar, Sonal and Sakshi, S and Kim, Jaehyeon and Ping, Wei and Valle, Rafael and Manocha, Dinesh and Catanzaro, Bryan},
+  journal={arXiv preprint arXiv:2503.03983},
+  year={2025}
+}
+```
 
-👋 Follow `zsxkib` on [Twitter/X](https://twitter.com/zsakib_)
+- Audio Flamingo
+```
+@inproceedings{kong2024audio,
+  title={Audio Flamingo: A Novel Audio Language Model with Few-Shot Learning and Dialogue Abilities},
+  author={Kong, Zhifeng and Goel, Arushi and Badlani, Rohan and Ping, Wei and Valle, Rafael and Catanzaro, Bryan},
+  booktitle={International Conference on Machine Learning},
+  pages={25125--25148},
+  year={2024},
+  organization={PMLR}
+}
+```
