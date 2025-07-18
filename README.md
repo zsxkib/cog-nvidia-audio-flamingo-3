@@ -1,5 +1,7 @@
 # Audio Flamingo 3
 
+[![Replicate](https://replicate.com/zsxkib/audio-flamingo-3/badge)](https://replicate.com/zsxkib/audio-flamingo-3)
+
 You know how most audio AI is either "transcribe this speech" or "this is probably music"? Audio Flamingo 3 actually understands audio. 
 
 Ask it what's happening in a 10-minute podcast and it'll tell you. Play it a song and it can analyze the emotional progression. Give it a complex soundscape with multiple people talking and background noise, and it figures it out.
