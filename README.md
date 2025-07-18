@@ -1,222 +1,111 @@
----
-license: other
-title: Audio Flamingo 3 Demo
-sdk: gradio
-emoji: 🚀
-colorFrom: green
-colorTo: green
-pinned: true
-short_description: Audio Flamingo 3 Demo
----
+# Audio Flamingo 3
 
-<div align="center" style="display: flex; justify-content: center; align-items: center; text-align: center;">
-  <a href="https://github.com/NVIDIA/audio-flamingo" style="margin-right: 20px; text-decoration: none; display: flex; align-items: center;">
-    <img src="static/logo-no-bg.png" alt="Audio Flamingo 3 🔥🚀🔥" width="120">
-  </a>
-</div>
-<div align="center" style="display: flex; justify-content: center; align-items: center; text-align: center;">
-    <h2>
-    Audio Flamingo 3: Advancing Audio Intelligence with Fully Open Large Audio-Language Models
-    </h2>
-</div>
+You know how most audio AI is either "transcribe this speech" or "this is probably music"? Audio Flamingo 3 actually understands audio. 
 
-<div align="center" style="display: flex; justify-content: center; margin-top: 10px;">
-  <a href=""><img src="https://img.shields.io/badge/arXiv-2503.03983-AD1C18" style="margin-right: 5px;"></a>
-  <a href="https://research.nvidia.com/labs/adlr/AF3/"><img src="https://img.shields.io/badge/Demo page-228B22" style="margin-right: 5px;"></a>
-  <a href="https://github.com/NVIDIA/audio-flamingo"><img src='https://img.shields.io/badge/Github-Audio Flamingo 3-9C276A' style="margin-right: 5px;"></a>
-  <a href="https://github.com/NVIDIA/audio-flamingo/stargazers"><img src="https://img.shields.io/github/stars/NVIDIA/audio-flamingo.svg?style=social"></a>
-</div>
+Ask it what's happening in a 10-minute podcast and it'll tell you. Play it a song and it can analyze the emotional progression. Give it a complex soundscape with multiple people talking and background noise, and it figures it out.
 
-<div align="center" style="display: flex; justify-content: center; margin-top: 10px; flex-wrap: wrap; gap: 5px;">
-  <a href="https://huggingface.co/nvidia/audio-flamingo-3">
-    <img src="https://img.shields.io/badge/🤗-Checkpoints-ED5A22.svg">
-  </a>
-  <a href="https://huggingface.co/nvidia/audio-flamingo-3-chat">
-    <img src="https://img.shields.io/badge/🤗-Checkpoints (Chat)-ED5A22.svg">
-  </a>
-  <a href="https://huggingface.co/datasets/nvidia/AudioSkills">
-    <img src="https://img.shields.io/badge/🤗-Dataset: AudioSkills--XL-ED5A22.svg">
-  </a>
-  <a href="https://huggingface.co/datasets/nvidia/LongAudio">
-    <img src="https://img.shields.io/badge/🤗-Dataset: LongAudio--XL-ED5A22.svg">
-  </a>
-  <a href="https://huggingface.co/datasets/nvidia/AF-Chat">
-    <img src="https://img.shields.io/badge/🤗-Dataset: AF--Chat-ED5A22.svg">
-  </a>
-  <a href="https://huggingface.co/datasets/nvidia/AF-Think">
-    <img src="https://img.shields.io/badge/🤗-Dataset: AF--Think-ED5A22.svg">
-  </a>
-</div>
+## Try it right now
 
-<div align="center" style="display: flex; justify-content: center; margin-top: 10px;">
-<a href="https://huggingface.co/spaces/nvidia/audio_flamingo_3"><img src="https://img.shields.io/badge/🤗-Gradio Demo (7B)-5F9EA0.svg" style="margin-right: 5px;"></a>
-</div>
-
-## Overview
-
-This repo contains the PyTorch implementation of [Audio Flamingo 3: Advancing Audio Intelligence with Fully Open Large Audio-Language Models](). Audio Flamingo 3 (AF3) is a fully open, state-of-the-art Large Audio-Language Model (LALM) that advances reasoning and understanding across speech, sounds, and music. AF3 builds on previous work with innovations in:
-
-- Unified audio representation learning (speech, sound, music)  
-- Flexible, on-demand chain-of-thought reasoning (Thinking in Audio) 
-- Long-context audio comprehension (including speech and up to 10 minutes)
-- Multi-turn, multi-audio conversational dialogue (AF3-Chat)    
-- Voice-to-voice interaction (AF3-Chat)    
-
-Extensive evaluations confirm AF3’s effectiveness, setting new benchmarks on over 20 public audio understanding and reasoning tasks.
-
-
-## Main Results
-
-Audio Flamingo 3 outperforms prior SOTA models including GAMA, Audio Flamingo, Audio Flamingo 2, Qwen-Audio, Qwen2-Audio, Qwen2.5-Omni.LTU, LTU-AS, SALMONN, AudioGPT, Gemini Flash v2 and Gemini Pro v1.5 on a number of understanding and reasoning benchmarks.
-
-<div align="center">
-  <img class="img-full" src="static/af3_radial-1.png" width="300">
-</div>
-
-<div align="center">
-  <img class="img-full" src="static/af3_sota.png" width="400">
-</div>
-
-## Audio Flamingo 3 Architecture
-
-Audio Flamingo 3 uses AF-Whisper unified audio encoder, MLP-based audio adaptor, Decoder-only LLM backbone (Qwen2.5-7B), and Streaming TTS module (AF3-Chat).
-Audio Flamingo 3 can take up to 10 minutes of audio inputs. 
-
-<div align="center">
-  <img class="img-full" src="static/af3_main_diagram-1.png" width="800">
-</div>
-
-## Installation
+Got a GPU and Docker? Three commands and you're analyzing audio:
 
 ```bash
-./environment_setup.sh af3
+git clone https://github.com/zsxkib/cog-nvidia-audio-flamingo-3.git
+cd cog-nvidia-audio-flamingo-3
+sudo cog predict -i audio=@static/audio/audio2.wav -i prompt="What type of audio is this?" -i enable_thinking=true
 ```
 
-## Gradio Web Demo
+That's it. No setup, no config files, no hunting for model weights. It downloads everything automatically and starts working.
 
-This repository includes a Gradio web application (`app.py`) that provides an interactive interface for Audio Flamingo 3:
+## What makes this different
 
-- **Single-Turn Inference** - Ask questions about audio files
-- **Think/Long Audio** - Chain-of-thought reasoning for complex audio analysis  
-- **Multi-Turn Chat** - Conversational dialogue about audio content
-- **Example audio files** - Pre-loaded examples to test the model
+Most audio models do one thing. Audio Flamingo 3 understands audio like a human would.
 
-To run the Gradio demo, use the manual installation guide below.
+Turn on "thinking mode" and watch it reason through what it's hearing step by step. It breaks down complex audio, makes connections, and builds up to insights. 
 
-## Detailed Manual Installation Guide
+It handles up to 10 minutes of audio in one go. Perfect for podcasts, interviews, music analysis, or any audio where context matters.
 
-If the automatic installation script doesn't work, follow these **exact commands** that have been tested and verified to work:
-
-### Prerequisites
-- NVIDIA GPU with CUDA support
-- Conda/Miniconda installed  
-- Linux environment
-
-### Complete Working Installation Sequence
+## Some things you can try
 
 ```bash
-# Step 1: Create and activate conda environment
+# Describe any audio file
+sudo cog predict -i audio=@my_song.wav -i prompt="What's happening in this audio?"
+
+# Transcribe speech
+sudo cog predict -i audio=@interview.wav -i prompt="Transcribe this"
+
+# Analyze music with step-by-step reasoning
+sudo cog predict -i audio=@track.wav -i prompt="Analyze the musical structure" -i enable_thinking=true
+
+# Just analyze part of a long file
+sudo cog predict -i audio=@podcast.wav -i prompt="What are they discussing?" -i start_time=120 -i end_time=300
+```
+
+## All the parameters
+
+- `audio` - Your audio file
+- `prompt` - What you want to know about it
+- `enable_thinking` - Set to `true` to see step-by-step reasoning
+- `system_prompt` - Custom instructions for output format
+- `temperature` - How creative the response is (0.0-1.0)
+- `max_length` - Response length (50-2048 tokens)
+- `start_time` / `end_time` - Analyze specific segments
+
+## What you need
+
+- NVIDIA GPU (tested on A100, but others work)
+- Docker
+- Cog (`pip install cog`)
+
+## Use cases
+
+Content creators analyzing podcasts and interviews. Musicians getting feedback on compositions. Researchers working with audio data. Anyone who needs to understand what's in audio files beyond basic transcription.
+
+## How it works
+
+Audio Flamingo 3 uses a unified encoder that treats speech, music, and sound effects the same way. It connects to a 7 billion parameter language model that can reason about what it hears.
+
+The thinking mode runs chain-of-thought reasoning—like having an audio expert walk through their analysis out loud.
+
+## Performance
+
+It beats other models on audio understanding benchmarks. But benchmarks are just numbers. Try it on your audio and see if it's useful.
+
+## If you want to run the web demo
+
+```bash
+# Set up conda environment
 conda create -n audio-flamingo python=3.10 -y
 conda activate audio-flamingo
 
-# Step 2: Install PyTorch with CUDA 12.1 support
+# Install PyTorch with CUDA
 pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu121
 
-# Step 3: Install core dependencies
-pip install gradio peft huggingface_hub
+# Install everything else
+pip install gradio peft huggingface_hub hydra-core loguru soundfile librosa openai-whisper ftfy jiwer einops wandb kaldiio matplotlib opencv-python-headless pydub pytorchvideo==0.1.5
 
-# Step 4: Install additional dependencies (excluding deepspeed initially)
-pip install hydra-core loguru soundfile librosa openai-whisper ftfy jiwer einops wandb kaldiio matplotlib opencv-python-headless
-
-# Step 5: Install PyTorchVideo (required by llava module)
-pip install pytorchvideo==0.1.5
-
-# Step 6: Install CUDA toolkit (required for DeepSpeed compilation)
+# Install CUDA toolkit and DeepSpeed
 conda install nvidia/label/cuda-12.4.0::cuda-toolkit -y
-
-# Step 7: Install DeepSpeed with proper CUDA support
 export CUDA_HOME=$CONDA_PREFIX
-pip install deepspeed==0.15.4
+pip install deepspeed==0.15.4 transformers==4.46.0
 
-# Step 8: Install exact transformers version (critical for compatibility)
-pip install transformers==4.46.0 --force-reinstall
-
-# Step 9: Run the application
+# Run it
 CUDA_HOME=$CONDA_PREFIX python app.py
 ```
 
-### Quick Start (Copy-Paste Ready)
-```bash
-conda create -n audio-flamingo python=3.10 -y && conda activate audio-flamingo
-pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu121
-pip install gradio peft huggingface_hub
-pip install hydra-core loguru soundfile librosa openai-whisper ftfy jiwer einops wandb kaldiio matplotlib opencv-python-headless
-pip install pytorchvideo==0.1.5
-conda install nvidia/label/cuda-12.4.0::cuda-toolkit -y
-export CUDA_HOME=$CONDA_PREFIX && pip install deepspeed==0.15.4
-pip install transformers==4.46.0 --force-reinstall
-CUDA_HOME=$CONDA_PREFIX python app.py
-```
+## Code
 
-### Expected Output
-When successful, you'll see:
-```
-* Running on local URL:  http://127.0.0.1:7860
-* Running on public URL: https://xxxxx.gradio.live
-```
-
-### Critical Notes
-- **DO NOT** try to install from requirements.txt directly (deepspeed will fail)
-- **DO NOT** try to install llava as editable package (no setup.py exists)
-- **ALWAYS** set CUDA_HOME when running: `CUDA_HOME=$CONDA_PREFIX python app.py`
-- **MUST** use transformers==4.46.0 exactly (newer versions break imports)
-
-### Common Failures & Solutions
-- **"ModuleNotFoundError: No module named 'pytorchvideo'"** → Install pytorchvideo==0.1.5
-- **"CUDA_HOME does not exist"** → Install cuda-toolkit via conda and set CUDA_HOME
-- **"cannot import name 'Qwen2FlashAttention2'"** → Use transformers==4.46.0 exactly
-- **DeepSpeed compilation fails** → Ensure CUDA toolkit installed via conda, not pip
-
-### Tested Environment
-✅ **Verified working on:**
-- Ubuntu Linux + NVIDIA A100 80GB
-- CUDA 12.4 + PyTorch 2.5.1+cu121
-- Python 3.10 + Conda environment
-
-## Code Structure
-
-- The folder ```audio_flamingo_3/``` contains the main training and inference code of Audio Flamingo 3.
-- The folder ```audio_flamingo_3/scripts``` contains the inference scripts of Audio Flamingo 3 in case you would like to use our pretrained checkpoints on HuggingFace.
-
-Each folder is self-contained and we expect no cross dependencies between these folders. This repo does not contain the code for Streaming-TTS pipeline which will released in the near future.
-
-## Single Line Inference
-
-To infer stage 3 model directly, run the command below:
-```bash
-python llava/cli/infer_audio.py --model-base /path/to/checkpoint/af3-7b --conv-mode auto --text "Please describe the audio in detail" --media static/audio1.wav
-```
-
-To infer the model in stage 3.5 model, run the command below:
-```bash
-python llava/cli/infer_audio.py --model-base /path/to/checkpoint/af3-7b --model-path /path/to/checkpoint/af3-7b/stage35 --conv-mode auto --text "Please describe the audio in detail" --media static/audio1.wav --peft-mode
-```
-
-## References
-
-The main training and inferencing code within each folder are modified from [NVILA](https://github.com/NVlabs/VILA/tree/main) [Apache license](incl_licenses/License_1.md).
+- `predict.py` - Main Cog interface
+- `app.py` - Gradio web demo  
+- `llava/` - Model code
+- `static/` - Example audio files
 
 ## License
 
-- The code in this repo is under [MIT license](incl_licenses/MIT_license.md).
-- The checkpoints are for non-commercial use only [NVIDIA OneWay Noncommercial License](incl_licenses/NVIDIA_OneWay_Noncommercial_License.docx). They are also subject to the [Qwen Research license](https://huggingface.co/Qwen/Qwen2.5-7B/blob/main/LICENSE), the [Terms of Use](https://openai.com/policies/terms-of-use) of the data generated by OpenAI, and the original licenses accompanying each training dataset.
-- Notice: Audio Flamingo 3 is built with Qwen-2.5. Qwen is licensed under the Qwen RESEARCH LICENSE AGREEMENT, Copyright (c) Alibaba Cloud. All Rights Reserved.
-
+Code is MIT. Model weights are non-commercial use only. Built on Qwen2.5-7B.
 
 ## Citation
 
-- Audio Flamingo 2
-```
+```bibtex
 @article{ghosh2025audio,
   title={Audio Flamingo 2: An Audio-Language Model with Long-Audio Understanding and Expert Reasoning Abilities},
   author={Ghosh, Sreyan and Kong, Zhifeng and Kumar, Sonal and Sakshi, S and Kim, Jaehyeon and Ping, Wei and Valle, Rafael and Manocha, Dinesh and Catanzaro, Bryan},
@@ -225,14 +114,8 @@ The main training and inferencing code within each folder are modified from [NVI
 }
 ```
 
-- Audio Flamingo
-```
-@inproceedings{kong2024audio,
-  title={Audio Flamingo: A Novel Audio Language Model with Few-Shot Learning and Dialogue Abilities},
-  author={Kong, Zhifeng and Goel, Arushi and Badlani, Rohan and Ping, Wei and Valle, Rafael and Catanzaro, Bryan},
-  booktitle={International Conference on Machine Learning},
-  pages={25125--25148},
-  year={2024},
-  organization={PMLR}
-}
-```
+---
+
+Made by NVIDIA. Packaged for Replicate by [@zsxkib](https://twitter.com/zsxkib).
+
+[![Replicate](https://replicate.com/zsxkib/audio-flamingo-3/badge)](https://replicate.com/zsxkib/audio-flamingo-3)

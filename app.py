@@ -4,7 +4,7 @@ import llava
 from peft import PeftModel
 import os
 from huggingface_hub import snapshot_download
-
+import copy 
 # ---------------------------------
 # SINGLE-TURN MODEL SETUP
 # ---------------------------------
@@ -15,14 +15,15 @@ MODEL_BASE_THINK = os.path.join(MODEL_BASE_SINGLE, 'stage35')
 # model_single = llava.load(MODEL_BASE_SINGLE, model_base=None, devices=[0])
 model_single = llava.load(MODEL_BASE_SINGLE, model_base=None)
 model_single = model_single.to("cuda")
+model_single_copy = copy.deepcopy(model_single)
 
 generation_config_single = model_single.default_generation_config
 
 model_think = PeftModel.from_pretrained(
-            model_single,
-            MODEL_BASE_THINK,
-            device_map="auto",
-            torch_dtype=torch.float16,
+        model_single,
+        MODEL_BASE_THINK,
+        device_map="auto",
+        torch_dtype=torch.float16,
         )
 
 # # ---------------------------------
@@ -40,7 +41,7 @@ def single_turn_infer(audio_file, prompt_text):
     try:
         sound = llava.Sound(audio_file)
         full_prompt = f"<sound>\n{prompt_text}"
-        response = model_single.generate_content([sound, full_prompt], generation_config=generation_config_single)
+        response = model_single_copy.generate_content([sound, full_prompt], generation_config=generation_config_single)
         return response
     except Exception as e:
         return f"❌ Error: {str(e)}"

@@ -32,7 +32,6 @@ __pycache__/
 
 # Development directories
 .claude/
-.cog/
 .gradio/
 
 # Virtual environments
